@@ -10,6 +10,7 @@ spring:
         server-addr: 192.168.32.33:8848,192.168.32.34:8848,192.168.32.35:8848
         username: crm
         password: crm123456!
-        namespace: 104717f2-83ce-4b0a-901d-c785cc4f4bf6
+        namespace: ca2511dc-ae29-40f0-b1d9-8daca30a7e9c
         file-extension: yaml
-        prefix: yzl-customer-dev
+        prefix: yzl-crm-customer-mapper-dev
+        group: crm-mapper
