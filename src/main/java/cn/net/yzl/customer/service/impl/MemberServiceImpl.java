@@ -1,15 +1,18 @@
 package cn.net.yzl.customer.service.impl;
 
+import cn.net.yzl.common.entity.Page;
+import cn.net.yzl.common.util.AssemblerResultUtil;
+import cn.net.yzl.customer.dao.IBaseDAO;
 import cn.net.yzl.customer.dao.MemberMapper;
 import cn.net.yzl.customer.dto.member.MemberSerchConditionDTO;
 import cn.net.yzl.customer.model.Member;
 import cn.net.yzl.customer.service.MemberService;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -18,27 +21,29 @@ public class MemberServiceImpl implements MemberService {
     private MemberMapper memberMapper;
 
     @Override
-    public PageInfo<Member> findPage(MemberSerchConditionDTO dto) {
-        PageInfo<Member> result = memberMapper.findPageByCondition(dto);
-        return result;
+    public Page<Member> findPage(MemberSerchConditionDTO dto) {
+        if(dto.getCurrentPage() == null){
+            dto.setCurrentPage(1);
+        }
+        if(dto.getPageSize()== null){
+            dto.setPageSize(10);
+        }
+        PageHelper.startPage(dto.getCurrentPage(),dto.getPageSize());
+        List<Member> list = memberMapper.findPageByCondition(dto);
+        Page<Member> page = AssemblerResultUtil.resultAssembler(list);
+
+        return page;
     }
 
-    /**
-     * 插入
-     * @param dto
-     * @return
-     */
-    @Override
-    public int save(Member dto) {
-       int count =  memberMapper.updateByMemberCardSelective(dto);
-       if(count == 0 ){
-          count =  memberMapper.insert(dto);
-       }
-       return  count;
-    }
+
 
     @Override
-    public int update(Member dto) {
+    public int updateByMemberCardSelective(Member dto) {
        return memberMapper.updateByMemberCardSelective(dto);
+    }
+
+    @Override
+    public IBaseDAO<Member, Integer> getDao() {
+        return memberMapper;
     }
 }

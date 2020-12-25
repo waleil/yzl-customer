@@ -2,6 +2,7 @@ package cn.net.yzl.customer.controller;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.net.yzl.common.entity.GeneralResult;
+import cn.net.yzl.common.entity.Page;
 import cn.net.yzl.customer.dto.crowdgroup.ListPageParamDTO;
 import cn.net.yzl.customer.dto.member.MemberSerchConditionDTO;
 import cn.net.yzl.customer.model.CustomerCrowdGroup;
@@ -34,9 +35,9 @@ public class MemberController {
 
     @ApiOperation(value="分页查询顾客列表")
     @PostMapping("/listPage")
-    public GeneralResult<PageInfo<Member>> listPage(@RequestBody MemberSerchConditionDTO dto) {
+    public GeneralResult<Page<Member>> listPage(@RequestBody MemberSerchConditionDTO dto) {
 
-        PageInfo<Member> result = service.findPage(dto);
+        Page<Member> result = service.findPage(dto);
 
         return GeneralResult.success(result);
     }
@@ -56,7 +57,7 @@ public class MemberController {
     @PostMapping("/updateByMemberCart")
     public GeneralResult<Boolean> updateByMemberCart(@RequestBody Member dto) {
 
-        int result = service.update(dto);
+        int result = service.updateByMemberCardSelective(dto);
         if(result == 1){
             return GeneralResult.success(Boolean.TRUE);
         }else{
