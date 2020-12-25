@@ -50,10 +50,17 @@
 
 
 
+
         <dependency>
             <groupId>cn.net.yzl</groupId>
             <artifactId>yzl-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0-RELEASE</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.github.pagehelper</groupId>
+                    <artifactId>pagehelper</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!--mybatis-plus启动器-->
@@ -192,6 +199,11 @@
                         <groupId>org.mybatis.generator</groupId>
                         <artifactId>mybatis-generator-core</artifactId>
                         <version>1.3.2</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.47</version>
                     </dependency>
                 </dependencies>
             </plugin>
