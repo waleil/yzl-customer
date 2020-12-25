@@ -8,7 +8,6 @@ import cn.net.yzl.customer.dto.member.MemberSerchConditionDTO;
 import cn.net.yzl.customer.model.Member;
 import cn.net.yzl.customer.service.MemberService;
 import com.github.pagehelper.PageHelper;
-
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -35,8 +34,6 @@ public class MemberServiceImpl implements MemberService {
         return page;
     }
 
-
-
     @Override
     public int updateByMemberCardSelective(Member dto) {
        return memberMapper.updateByMemberCardSelective(dto);
@@ -45,5 +42,16 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public IBaseDAO<Member, Integer> getDao() {
         return memberMapper;
+    }
+
+    /**
+     * 根据顾客编号查询基本信息
+     * @param memberCard
+     * @return
+     */
+    @Override
+    public Member getMemberService(String memberCard) {
+        return memberMapper.selectMemberByCord(memberCard);
+
     }
 }

@@ -224,5 +224,11 @@
        </if>
 
   </select>
-
+  <!--根据顾客号查询顾客基本信息 -->
+  <select id="selectMemberByCord" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM member
+    WHERE member_card = #{memberCard}
+  </select>
 </mapper>

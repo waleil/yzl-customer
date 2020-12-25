@@ -1,23 +1,13 @@
 package cn.net.yzl.customer.controller;
 
-import cn.hutool.core.bean.BeanUtil;
 import cn.net.yzl.common.entity.GeneralResult;
 import cn.net.yzl.common.entity.Page;
-import cn.net.yzl.customer.dto.crowdgroup.ListPageParamDTO;
 import cn.net.yzl.customer.dto.member.MemberSerchConditionDTO;
-import cn.net.yzl.customer.model.CustomerCrowdGroup;
 import cn.net.yzl.customer.model.Member;
-import cn.net.yzl.customer.model.Province;
 import cn.net.yzl.customer.service.MemberService;
-import cn.net.yzl.customer.service.ProvinceService;
-import cn.net.yzl.customer.service.micservice.UserService;
-import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author : zhangruisong
@@ -63,7 +53,12 @@ public class MemberController {
         }else{
             return GeneralResult.success(Boolean.FALSE);
         }
-
     }
 
+    @ApiOperation(value="根据顾客号查询顾客基本信息")
+    @PostMapping("/getMember")
+    public GeneralResult<Member> getMember(@RequestParam("memberCard") String  memberCard) {
+        Member memberEntity = service.getMemberService(memberCard);
+        return GeneralResult.success(memberEntity);
+    }
 }

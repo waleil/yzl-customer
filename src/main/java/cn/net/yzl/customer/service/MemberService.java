@@ -7,6 +7,6 @@ import cn.net.yzl.customer.model.Member;
 public interface MemberService extends IBaseService<Member,Integer>{
     Page<Member> findPage(MemberSerchConditionDTO params);
     int updateByMemberCardSelective(Member dto);
-
+    Member getMemberService(String memberCard);
 
 }
